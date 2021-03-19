@@ -28,10 +28,3 @@ törömtömtöm
 tudelu
 törömtömtöm
 
-tudelu
-törömtömtöm
-
-tudelu
-törömtömtöm
-
-fuck off
