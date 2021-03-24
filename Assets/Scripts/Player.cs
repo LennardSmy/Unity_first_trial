@@ -13,15 +13,27 @@ public class Player : MonoBehaviour
 
     [SerializeField] 
     private float _vaccinationRate = 5f;
-    private float nextFire = 0.0f;    
+    private float nextFire = 0.0f;
+
+    [SerializeField] 
+    private int _lives = 3;
+
+    private float _colorChannel = 1f;
+    private MaterialPropertyBlock _mpb;
     
     // Start is called before the first frame update
     void Start()
     {
+        if (_mpb == null)
+        {
+            _mpb = new MaterialPropertyBlock();
+            _mpb.Clear();
+            this.GetComponent<Renderer>().GetPropertyBlock(_mpb);
+        }
         transform.position = new Vector3(0, 0, 0);
         
         
-    }
+    } 
 
     // Update is called once per frame
     void Update()
@@ -107,5 +119,26 @@ public class Player : MonoBehaviour
             Instantiate(_vaccinePrefab,(transform.position + initVaccinepos),Quaternion.identity);
         }
     }
+
+   public void Damage()
+   {
+      
+       //reduces lives by one
+       // variable *= , += , /= , -= , %= number, ---> variable = variable *, +, /, -, % number; 
+       // ++variable , variable++ , --variable , variable-- ;
+       _lives = _lives - 1;
+
+       _colorChannel -= 0.5f;
+       _mpb.SetColor("_Color",new Color(_colorChannel,0,_colorChannel,1f));
+       this.GetComponent<Renderer>().SetPropertyBlock(_mpb);
+       
+       if (_lives == 0)
+       {
+           Destroy(this.gameObject);
+       }
+
+   }
 }
+
+
     
