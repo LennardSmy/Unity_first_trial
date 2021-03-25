@@ -7,6 +7,8 @@ public class Vaccine : MonoBehaviour
     
     [SerializeField]
     private float _speed = 5f;
+    [SerializeField]
+    private GameObject _vaccineSpawn;
  
     
     // Start is called before the first frame update
@@ -24,6 +26,8 @@ public class Vaccine : MonoBehaviour
         transform.Translate(Vector3.up * Time.deltaTime * _speed);
         
         _selfdestruct();
+        
+        this.transform.parent = GameObject.Find("VaccineSpawn").transform;
     }
 
     private void _selfdestruct()
@@ -32,5 +36,10 @@ public class Vaccine : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+
+    private void _setParent()
+    {
+        this.transform.parent = GameObject.Find("VaccineSpawn").transform;
     }
 } 

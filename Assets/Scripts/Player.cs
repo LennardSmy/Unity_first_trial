@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] 
     private GameObject _vaccinePrefab;
+    
 
     [SerializeField] 
     private float _vaccinationRate = 5f;
@@ -20,6 +21,8 @@ public class Player : MonoBehaviour
 
     private float _colorChannel = 1f;
     private MaterialPropertyBlock _mpb;
+    [SerializeField]
+    private SpawnManager _spawnManager;
     
     // Start is called before the first frame update
     void Start()
@@ -134,7 +137,16 @@ public class Player : MonoBehaviour
        
        if (_lives == 0)
        {
+           if (_spawnManager != null)
+           {
+               _spawnManager.playerDead();
+           }
+           else
+           {
+               Debug.LogError("SpawnManager not assigned!");
+           }
            Destroy(this.gameObject);
+           
        }
 
    }

@@ -10,6 +10,8 @@ public class SpawnManager : MonoBehaviour
     
     [SerializeField]
     private float _delay = 2f;
+
+    private bool _spawningOn = true;
     
     void Start()
     {
@@ -21,14 +23,20 @@ public class SpawnManager : MonoBehaviour
     {
         
     }
+    //T
+    public void playerDead()
+    {
+        _spawningOn = false;
+    }
 
     IEnumerator SpawnSystem()
     {
-        while (true)
+        //this while loop should go until the game is finished of one enters a new scene. 
+        
+        while (_spawningOn)
         {
-            Instantiate(_virusPrefab, new Vector3(Random.Range(-8f, 8f), 7, 0f),Quaternion.identity);
+            Instantiate(_virusPrefab, new Vector3(Random.Range(-8f, 8f), 7, 0f),Quaternion.identity,this.transform);
             yield return new WaitForSeconds(_delay);
         }
-        
     }
 }
