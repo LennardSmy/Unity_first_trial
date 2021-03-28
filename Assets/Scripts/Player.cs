@@ -27,12 +27,13 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (_mpb == null)
+       /*if (_mpb == null)
         {
             _mpb = new MaterialPropertyBlock();
             _mpb.Clear();
             this.GetComponent<Renderer>().GetPropertyBlock(_mpb);
-        }
+        }*/
+       
         transform.position = new Vector3(0, 0, 0);
         
         
@@ -132,8 +133,8 @@ public class Player : MonoBehaviour
        _lives = _lives - 1;
 
        _colorChannel -= 0.5f;
-       _mpb.SetColor("_Color",new Color(_colorChannel,0,_colorChannel,1f));
-       this.GetComponent<Renderer>().SetPropertyBlock(_mpb);
+       //_mpb.SetColor("_Color",new Color(_colorChannel,0,_colorChannel,1f));
+       //this.GetComponent<Renderer>().SetPropertyBlock(_mpb);
        
        if (_lives == 0)
        {

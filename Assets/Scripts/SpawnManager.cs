@@ -38,5 +38,10 @@ public class SpawnManager : MonoBehaviour
             Instantiate(_virusPrefab, new Vector3(Random.Range(-8f, 8f), 7, 0f),Quaternion.identity,this.transform);
             yield return new WaitForSeconds(_delay);
         }
+
+        if (_spawningOn == false)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

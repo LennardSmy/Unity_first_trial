@@ -7,9 +7,10 @@ public class Vaccine : MonoBehaviour
     
     [SerializeField]
     private float _speed = 5f;
-    [SerializeField]
-    private GameObject _vaccineSpawn;
- 
+
+    //[SerializeField] 
+    //private GameObject _Player; 
+    
     
     // Start is called before the first frame update
     /*void Start()
@@ -27,12 +28,12 @@ public class Vaccine : MonoBehaviour
         
         _selfdestruct();
         
-        this.transform.parent = GameObject.Find("VaccineSpawn").transform;
+       _setParent();
     }
 
     private void _selfdestruct()
     {
-        if (transform.position.y > 6f)
+        if (transform.position.y > 6f )
         {
             Destroy(this.gameObject);
         }
