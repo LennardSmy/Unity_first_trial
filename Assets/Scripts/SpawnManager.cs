@@ -13,6 +13,11 @@ public class SpawnManager : MonoBehaviour
 
     private bool _spawningOn = true;
     
+    
+  
+
+    
+
     void Start()
     {
         StartCoroutine(SpawnSystem());
@@ -21,7 +26,7 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     //T
     public void playerDead()
@@ -36,6 +41,7 @@ public class SpawnManager : MonoBehaviour
         while (_spawningOn)
         {
             Instantiate(_virusPrefab, new Vector3(Random.Range(-8f, 8f), 7, 0f),Quaternion.identity,this.transform);
+           
             yield return new WaitForSeconds(_delay);
         }
 

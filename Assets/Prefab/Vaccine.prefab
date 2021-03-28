@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5.09
+  _spinSpeed: 200
 --- !u!136 &2176417120995663764
 CapsuleCollider:
   m_ObjectHideFlags: 0

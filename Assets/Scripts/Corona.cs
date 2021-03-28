@@ -8,10 +8,17 @@ using UnityEngine;
 {
     [SerializeField] 
     private float _speed = 5f;
+    [SerializeField] 
+    private float _spinSpeed = 200f;
     
     void Update()
     {
         transform.Translate(Vector3.down *_speed * Time.deltaTime);
+        
+        //float _randomFloat = Random.Range(-1f, 1f);
+        
+        transform.Rotate(new Vector3(0f,   _spinSpeed * Time.deltaTime, 0f), Space.Self);
+        
         if (transform.position.y < -6f)
         {
             transform.position = new Vector3(Random.Range(-8f, 8f), 6f, 0f);

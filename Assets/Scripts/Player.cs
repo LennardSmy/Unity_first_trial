@@ -19,6 +19,9 @@ public class Player : MonoBehaviour
     [SerializeField] 
     private int _lives = 3;
 
+    [SerializeField]
+    private float _spinSpeed = 6;
+
     private float _colorChannel = 1f;
     private MaterialPropertyBlock _mpb;
     [SerializeField]
@@ -53,10 +56,25 @@ public class Player : MonoBehaviour
     // Player movement function
     private void PlayerMovement()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        transform.Translate(Vector3.right * Time.deltaTime * _speed * horizontalInput);
+        
         // in video 12 you can see how they solved the axes moving part
+        float horizontalInput = Input.GetAxis("Horizontal");
+        
         float verticalInput = Input.GetAxis("Vertical");
+        
+        //Debug.Log(horizontalInput);
+        print(horizontalInput);
+        
+            transform.GetChild(0).Rotate(new Vector3(0f,horizontalInput* _spinSpeed * Time.deltaTime, 0f), Space.Self);
+        
+
+        
+        
+        transform.Translate(Vector3.right * 
+                            Time.deltaTime * 
+                            _speed *
+                            horizontalInput);
+        
         transform.Translate(Vector3.up *
                             Time.deltaTime *
                             _speed *
@@ -68,7 +86,7 @@ public class Player : MonoBehaviour
     // This Function checks boundaries and sets player's behaviour when touching them.
     private void CheckBoundaries()
     {
-        if (transform.position.y > 0)
+        if (transform.position.y > 0f)
             //if th playerposition on the y axis is greater 
         {
             // we force the player position to be 0
@@ -78,12 +96,13 @@ public class Player : MonoBehaviour
         }
 
         else if (transform.position.y < -4.9f)
-            //if th playerposition on the y axis is greater 
+            //if the player position on the y axis is lower than -4.9  
         {
-            // we force the player position to be 0
+            // we force the player position to be -4.9
             transform.position = new Vector3(transform.position.x,
                 -4.9f,
                 0f);
+            
         }
         
         if (transform.position.x < -9.2f)
@@ -93,6 +112,8 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(9.55f,
                 transform.position.y,
                 0f);
+            transform.GetChild(0).rotation = Quaternion.identity;
+            
         }
         
         else if (transform.position.x > 9.55f)
@@ -102,6 +123,8 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(-9.2f,
                 transform.position.y,
                 0f);
+            transform.GetChild(0).rotation = Quaternion.identity;
+            
         }
     }
 
@@ -133,6 +156,9 @@ public class Player : MonoBehaviour
        _lives = _lives - 1;
 
        _colorChannel -= 0.5f;
+       
+       //this code is commented because now we have a drone object as a player which has a pregiven color 
+       //..and it is harder/makes less sense to change the color of the drone when being hit.
        //_mpb.SetColor("_Color",new Color(_colorChannel,0,_colorChannel,1f));
        //this.GetComponent<Renderer>().SetPropertyBlock(_mpb);
        

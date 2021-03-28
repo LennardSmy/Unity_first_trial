@@ -365,6 +365,7 @@ MonoBehaviour:
     type: 3}
   _vaccinationRate: 0.24
   _lives: 3
+  _spinSpeed: 200
   _spawnManager: {fileID: 936681498}
 --- !u!1 &922612932
 GameObject:

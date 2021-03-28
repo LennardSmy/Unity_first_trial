@@ -8,6 +8,9 @@ public class Vaccine : MonoBehaviour
     [SerializeField]
     private float _speed = 5f;
 
+    [SerializeField] 
+    private float _spinSpeed = 200f;
+
     //[SerializeField] 
     //private GameObject _Player; 
     
@@ -24,8 +27,10 @@ public class Vaccine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.Rotate(new Vector3(0f,_spinSpeed * Time.deltaTime, 0f), Space.Self);
+
         transform.Translate(Vector3.up * Time.deltaTime * _speed);
-        
+
         _selfdestruct();
         
        _setParent();
