@@ -42,12 +42,19 @@ using UnityEngine;
            Destroy(this.gameObject);
            
        }
+       if (other.CompareTag("UVLight"))
+       {
+           Destroy(this.gameObject);
+
+       }
        //but if the other one is the vaccine
        else if (other.CompareTag("Vaccine"))
        {
+           
            //destroy the vaccine and the virus
            Destroy(other.gameObject);
            Destroy(this.gameObject);
+
            
        }
        

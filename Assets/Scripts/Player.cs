@@ -10,6 +10,9 @@ public class Player : MonoBehaviour
 
     [SerializeField] 
     private GameObject _vaccinePrefab;
+    [SerializeField]
+    private GameObject _uvLightPrefab;
+
     
 
     [SerializeField] 
@@ -26,6 +29,12 @@ public class Player : MonoBehaviour
     private MaterialPropertyBlock _mpb;
     [SerializeField]
     private SpawnManager _spawnManager;
+
+    
+    [SerializeField]
+    private bool _isUVLightOn = false;
+
+    
     
     // Start is called before the first frame update
     void Start()
@@ -141,9 +150,19 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > nextFire)
         {
-            Debug.Log("space bar pressed");
+            //Debug.Log("space bar pressed");
             nextFire = Time.time + _vaccinationRate;
-            Instantiate(_vaccinePrefab,(transform.position + initVaccinepos),Quaternion.identity);
+            
+            //they used if(!uvlightprefab) , lets see which works
+            if (!_isUVLightOn)
+            {
+                Instantiate(_vaccinePrefab,(transform.position + initVaccinepos),Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(_uvLightPrefab,(transform.position + initVaccinepos),Quaternion.identity);
+            }
+            
         }
     }
 
