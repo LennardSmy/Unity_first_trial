@@ -2,32 +2,50 @@
  using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+ using UnityEngine.Serialization;
  using Random = UnityEngine.Random;
 
  public class Corona : MonoBehaviour
 {
+    
+    [Header("Corona Parameters")]
     [SerializeField] 
     private float _speed = 5f;
     [SerializeField] 
-    private float _spinSpeed = 200f;
+    private float _spinSpeed = 750f;
+
+    [FormerlySerializedAs("_wiggleRange")] [SerializeField] 
+    private float _wiggleSpeed = 10f;
     
     void Update()
     {
-        transform.Translate(Vector3.down *_speed * Time.deltaTime);
+        
+        
         
         //float _randomFloat = Random.Range(-1f, 1f);
-        
-        transform.Rotate(new Vector3(0f,   _spinSpeed * Time.deltaTime, 0f), Space.Self);
+        transform.Rotate(new Vector3(0f, _spinSpeed * Time.deltaTime, 0f), Space.Self);
+        transform.Translate(Vector3.down *_speed * Time.deltaTime);
+
+        if (name.Contains("B117"))
+        {
+            transform.Translate(Vector3.right * Random.Range(-1,1) * _wiggleSpeed * Time.deltaTime);
+            //transform.position = new Vector3(Random.Range(-_wiggleRange, _wiggleRange),
+            //transform.position.y,
+            //transform.position.z);
+        }
         
         if (transform.position.y < -6f)
         {
             transform.position = new Vector3(Random.Range(-8f, 8f), 6f, 0f);
+            
+            
         }
+        
 
 
     }
 
-    private void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter(Collider other)
     {
       // Debug.Log(other.name);
         // if the object we collide with is the player

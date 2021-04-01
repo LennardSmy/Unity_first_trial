@@ -110,6 +110,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
+  _spinSpeed: 750
+  _wiggleRange: 1
 --- !u!54 &6496039383701147197
 Rigidbody:
   m_ObjectHideFlags: 0

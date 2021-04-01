@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Vaccine : MonoBehaviour
 {
-    
+    [Header("Vaccine Parameters")]
     [SerializeField]
     private float _speed = 5f;
 

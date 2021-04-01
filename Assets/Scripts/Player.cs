@@ -8,34 +8,38 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _speed = 0.1f;
 
+    
+    [Header("External Components")]
     [SerializeField] 
     private GameObject _vaccinePrefab;
     [SerializeField]
     private GameObject _uvLightPrefab;
-
+    [SerializeField]
+    private SpawnManager _spawnManager;
     
-
+    
+    
+    [Header("Vaccination Parameters")]
     [SerializeField] 
     private float _vaccinationRate = 5f;
     private float nextFire = 0.0f;
-
+    [SerializeField]
+    private float _powerUpTimeOut = 5f;
+    [SerializeField]
+    private bool _isUVLightOn = true;
+    
+    [Header("Player Settings")]
     [SerializeField] 
     private int _lives = 3;
-
     [SerializeField]
     private float _spinSpeed = 6;
 
     private float _colorChannel = 1f;
     private MaterialPropertyBlock _mpb;
-    [SerializeField]
-    private SpawnManager _spawnManager;
 
-    
-    [SerializeField]
-    private bool _isUVLightOn = false;
 
-    
-    
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +49,7 @@ public class Player : MonoBehaviour
             _mpb.Clear();
             this.GetComponent<Renderer>().GetPropertyBlock(_mpb);
         }*/
+       _isUVLightOn = true;
        
         transform.position = new Vector3(0, 0, 0);
         
@@ -72,7 +77,7 @@ public class Player : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
         
         //Debug.Log(horizontalInput);
-        print(horizontalInput);
+        //print(horizontalInput);
         
             transform.GetChild(0).Rotate(new Vector3(0f,horizontalInput* _spinSpeed * Time.deltaTime, 0f), Space.Self);
         
@@ -154,7 +159,7 @@ public class Player : MonoBehaviour
             nextFire = Time.time + _vaccinationRate;
             
             //they used if(!uvlightprefab) , lets see which works
-            if (!_isUVLightOn)
+            if (_isUVLightOn)
             {
                 Instantiate(_vaccinePrefab,(transform.position + initVaccinepos),Quaternion.identity);
             }
@@ -196,6 +201,19 @@ public class Player : MonoBehaviour
        }
 
    }
+
+   public void ActivatePowerUp()
+   {
+       _isUVLightOn = false;
+       StartCoroutine(DeactivatePowerUp());
+   }
+
+   IEnumerator DeactivatePowerUp()
+   {
+       yield return new WaitForSeconds(_powerUpTimeOut);
+       _isUVLightOn = true;
+   }
+   
 }
 
 
